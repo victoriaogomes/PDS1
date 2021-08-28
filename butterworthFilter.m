@@ -20,7 +20,8 @@ fs = omega_s * fp;
 %% PASSO 04: Obtenção dos pólos estáveis (assumindo Ωc = 1)
 % sk = e ^ i * (π + 2πk / 2*N) + (π/2)
 % Como N = 1, só temos k = 0, e: s0 = e ^ i * (π/2) + (π/2) = e^(i*π)
-s0 = exp(1i*pi);
+%s0 = exp(1i*pi);
+s0 = -1;
 
 %% PASSO 05: Montagem da função de transferência
 % Hs = tf(1, [1, -s0]);

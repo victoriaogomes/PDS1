@@ -1,5 +1,5 @@
 %% Frequência de passagem (fp) em hertz
-fp = 1000;
+fp = 500;
 
 %% Máxima amplificação dos componentes do sinal (em dB)
 Amax = 1;
@@ -12,9 +12,10 @@ N = 1;
 
 %% Chamada a função que cria o filtro e retorna o numerador e o denominador
 % da sua função de transferência, bem como a sua frequência de rejeição
-[num, denom, fs] = butterworthFilter(10*fp, Amax, Amin, N);
+[num, denom, fs] = butterworthFilter(fp, Amax, Amin, N);
 %% Realização da transformada de Fourier
 % da sua função de transferência, bem como a sua frequência de rejeição
+
 out = sim('LPFSimulation');
 teste = out.answer.data;
 L = numel(teste);
