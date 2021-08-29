@@ -45,9 +45,9 @@ Hs = tf(((omega_c*2*pi*fp)^(N)), [1, -(s0*omega_c*2*pi*fp)]);
 %% PASSO 10: Resposta ao impulso do filtro passa-baixas criado
 % Frequência começa em 0, com marcações são separadas a cada (2*pi*fs)/100, e
 % termina em 2*pi*fs
+w = 0 : (2*pi*fs)/100 : 2*pi*fs;
 num = Hs.Numerator{:};
 denom = Hs.Denominator{:};
-w = 0 : (2*pi*fs)/100 : 2*pi*fs;
 figure('Name', 'Resposta em frequência do LPF');
 freqs(num, denom, w)
 hold on

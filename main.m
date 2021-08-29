@@ -16,7 +16,7 @@ N = 1;             % Ordem do filtro (N)
 
 %% Filtragem do sinal e exibição do resultado
 [filteredSignal, t_filt] = lsim(tf(num, denom), inputSignal, t);
-freqAndTimeResponse(t_filt, filteredSignal, 'Sinal filtrado');
+% freqAndTimeResponse(t_filt, filteredSignal, 'Sinal filtrado');
 
 %% Trem de impulsos
 [impTrain] = impulseTrain(f_nyquist, f_max, size(t_filt));
@@ -24,17 +24,11 @@ freqAndTimeResponse(t_filt, impTrain, strcat('Trem de impulsos'));
 newSignal = filteredSignal .* impTrain;
 freqAndTimeResponse(t, newSignal, 'Sinal multiplicado pelo trem de impulsos');
 
-%% Sample and holder
-%ups = 4;
 
-%fu = fs*ups;
-%tu = 0:1/fu:1-1/fu;
-
-%y = downsample(filteredSignal,ups);
-
-% stem(tu,y,'--x')
-%figure(10);
-%plot(y);
-%hold on
-%stairs(t,filteredSignal)
-%hold off
+%% Tentativa 2 milhões
+s = tf('s');
+Ts = 1/(f_nyquist);
+sys = (1-exp(-s*Ts))/s;
+bode(sys);
+[zohSignal, t_zoh] = lsim(sys, newSignal, t);
+freqAndTimeResponse(t_zoh, zohSignal, 'Sinal após o zoh');
