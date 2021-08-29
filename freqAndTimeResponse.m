@@ -1,5 +1,5 @@
 %% Declaração da função
-function [y1f, y1ff] = freqAndTimeResponse(t, inputSignal, figTitle, figNumber)
+function [y1f, y1ff] = freqAndTimeResponse(t, inputSignal, figTitle)
     %% Transforma o sinal de entrada para o domínio da frequência
     y1f = fft(inputSignal);
     
@@ -7,7 +7,7 @@ function [y1f, y1ff] = freqAndTimeResponse(t, inputSignal, figTitle, figNumber)
     y1ff = y1f .* conj(y1f); 
     
     %% Plotagem do gráfico comparando o sinal no domínio do tempo e da frequência
-    figure(figNumber);
+    figure('Name', figTitle);
     subplot(2, 1, 1);
     plot(t, inputSignal);
     title('Sinal no domínio do tempo');

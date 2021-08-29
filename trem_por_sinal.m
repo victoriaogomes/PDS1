@@ -29,7 +29,8 @@ title('Sinal Após a FFT');
 
 %% Convolução
 
-result = conv(yf, sinalf);
+% result = conv(yf, sinalf);
+result = y .* sinal;
 subplot(4, 1, 4)
 plot(result);
 title('Resultado da Convolucao');

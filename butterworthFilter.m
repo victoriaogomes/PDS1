@@ -48,9 +48,8 @@ Hs = tf(((omega_c*2*pi*fp)^(N)), [1, -(s0*omega_c*2*pi*fp)]);
 num = Hs.Numerator{:};
 denom = Hs.Denominator{:};
 w = 0 : (2*pi*fs)/100 : 2*pi*fs;
-figure(2);
+figure('Name', 'Resposta em frequência do LPF');
 freqs(num, denom, w)
-% semilogx(w, abs(output));
 hold on
 plot(omega_o,0.707,'o-','MarkerFaceColor','red','MarkerEdgeColor','red')
 text(omega_o,0.707,'\leftarrow Frequência de corte')
