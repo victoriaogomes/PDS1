@@ -1,31 +1,18 @@
-%% Frequência de passagem (fp) em hertz
-fp = 500;
+%% Sinal de entrada
+f_nyquist = 2*(2*7500);
+t = 0 : 2/(2*f_nyquist) : 2;
+inputSignal = sin(2*1000*pi*t) + sin(2*5000*pi*t) + sin(2*7500*pi*t);
 
-%% Máxima amplificação dos componentes do sinal (em dB)
-Amax = 1;
+%% Exibição do sinal de entrada no domínio do tempo e da frequência
+[y1f, y1ff] = freqAndTimeResponse(t, inputSignal, 'Sinal de entrada', 1);
 
-%% Mínima amplificação dos componentes do sinal (em dB)
-Amin = 20;
+%% Dados para a construção do filtro
+fp = 509;          % Frequência de passagem (fp) em hertz
+Amax = 1;          % Máxima amplificação dos componentes do sinal (em dB)
+Amin = 20;         % Mínima amplificação dos componentes do sinal (em dB)
+N = 1;             % Ordem do filtro (N)
 
-%% Ordem do filtro (N)
-N = 1;
-
-%% Chamada a função que cria o filtro e retorna o numerador e o denominador
-% da sua função de transferência, bem como a sua frequência de rejeição
-[num, denom, fs] = butterworthFilter(fp, Amax, Amin, N);
-%% Realização da transformada de Fourier
-% da sua função de transferência, bem como a sua frequência de rejeição
-
-out = sim('LPFSimulation');
-teste = out.answer.data;
-L = numel(teste);
-Fvrs = linspace(0, 1000, fix(L/2)+1)*pi; 
-fts = fft(teste)/L;
-
-Iv = 1:numel(Fvrs);  
-figure(2)
-semilogx(Fvrs, abs(fts(Iv))*2)
-grid
-xlabel('Frequency (rad/s)')
-ylabel('Amplitude')
-title('Frequency Domain Plot')
+%% Chamada a função que cria o filtro
+[num, denom, fs, omega_c] = butterworthFilter(fp, Amax, Amin, N);
+output_data = lsim(tf(num, denom), inputSignal, t);
+freqAndTimeResponse(t, output_data, 'Sinal filtrado', 3);

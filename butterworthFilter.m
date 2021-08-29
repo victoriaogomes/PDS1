@@ -5,7 +5,7 @@
 % Mínima amplificação dos componentes do sinal (em dB)
 % Ordem do filtro (N)
 %% Declaração da função
-function [num, denom, fs] = butterworthFilter(fp, Amax, Amin, N)
+function [num, denom, fs, omega_o] = butterworthFilter(fp, Amax, Amin, N)
 %% PASSO 01: Faremos os cálculos usando Ωp como 1
 % omega_p = 1;  % Frequência de passagem normalizada (em rad/s)
 
@@ -32,6 +32,8 @@ Amin2 = 10*log10(mult);
 
 %% PASSO 07: Cálculo do novo Ωc
 omega_c = omega_s/(((10^(Amin2/10))-1)^(1/(2*N)));
+episilon = sqrt((10^(Amax/10))-1);
+omega_o = 2*pi*fp/episilon;
 
 %% PASSO 08: Determinação da nova função de transferência
 % s -> s/2*π*fp
@@ -46,5 +48,12 @@ Hs = tf(((omega_c*2*pi*fp)^(N)), [1, -(s0*omega_c*2*pi*fp)]);
 num = Hs.Numerator{:};
 denom = Hs.Denominator{:};
 w = 0 : (2*pi*fs)/100 : 2*pi*fs;
+figure(2);
 freqs(num, denom, w)
+% semilogx(w, abs(output));
+hold on
+plot(omega_o,0.707,'o-','MarkerFaceColor','red','MarkerEdgeColor','red')
+text(omega_o,0.707,'\leftarrow Frequência de corte')
+grid on;
+hold off
 end
