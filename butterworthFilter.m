@@ -5,7 +5,7 @@
 % Mínima amplificação dos componentes do sinal (em dB)
 % Ordem do filtro (N)
 %% Declaração da função
-function [num, denom, fs, omega_o] = butterworthFilter(fp, Amax, Amin, N)
+function [num, denom, omega_o] = butterworthFilter(fp, Amax, Amin, N)
 %% PASSO 01: Faremos os cálculos usando Ωp como 1
 % omega_p = 1;  % Frequência de passagem normalizada (em rad/s)
 
