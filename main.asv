@@ -12,9 +12,10 @@ Amin = 20;         % Mínima amplificação dos componentes do sinal (em dB)
 N = 1;             % Ordem do filtro (N)
 
 
-%% Cálculo do fator de Downsample(Md) e Upsample (Mu) 
-% - Fs/Md > 2*F_max -> Fs/(2
-Md = (2 * (f_max +1)) / Fs;
+%% Cálculo do fator de Downsample(Md) e Upsample (Mu)
+%Fs
+% - Fs/Md > 2*F_max -> Fs/(2*F_max) > Md
+Md = Fs (2 * (f_max +1));
 % - Mu*(Fs/Md) < 5000
 Mu = (5000*Md)/Fs
 
