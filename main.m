@@ -11,6 +11,13 @@ Amax = 1;          % Máxima amplificação dos componentes do sinal (em dB)
 Amin = 20;         % Mínima amplificação dos componentes do sinal (em dB)
 N = 1;             % Ordem do filtro (N)
 
+
+%% Cálculo do fator de Downsample(Md) e Upsample (Mu) 
+% - Fs/Md > 2*F_max -> Fs/(2*F_max) > Md
+%Md = (2 * (f_max +1)) / Fs;
+% - Mu*(Fs/Md) < 5000
+%Mu = (5000*Md)/Fs
+
 %% Construção do filtro
 [num, denom, omega_c] = butterworthFilter(fp, Amax, Amin, N);
 
