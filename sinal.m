@@ -39,32 +39,39 @@ function [xt,fc,phi,t]=sinal(tempo,fcmin,fcmax)  % temo em segundos
      end
  end
  xt=sum(x,1);
- 
+ length(xt);
 % Graficando
 % Dominio do tempo
 figure(1);
 subplot(3,1,1);
-plot(t(1:200),x(1,1:200),'r',t(1:200),x(2,1:200),'g',t(1:200),x(10,1:200),'m');
-xlabel('Tempo(s)');
+plot(t(1,1:200),x(1,1:200),'r',t(1,1:200),x(2,1:200),'g',t(1,1:200),x(10,1:200),'m'); grid on;
+xlabel('Tempo  $t$(s)','interpreter','latex');
 ylabel('Amplitude');
-title('Sinais $x_{1}(t)$, $x_{2}(t)$, $x_{10}(t)$');
+title('Sinais $x_{1}(t)$, $x_{2}(t)$, $x_{10}(t)$','interpreter','latex');
 
 subplot(3,1,2);
-plot(t,xt,'b');
-xlabel('Tempo(s)');
+plot(t,xt,'b'); grid on;
+xlabel('Tempo  $t$(s)','interpreter','latex');
 ylabel('Amplitude');
-title('Sinal de entrada $x_{c}(t)$');
+title('Sinal de entrada $x_{c}(t)$','interpreter','latex');
 
 % Dominio da frequência  
 subplot(3,1,3);
 y=fft(xt); grid on;
-length(y);
-w=0:Fs/length(y):Fs-(Fs/length(y));
+yaux=fliplr(y(1,2:end));
+X=[yaux y];
+faixa=ceil(length(X)/4);
+X(1,1:faixa)=0;
+X(1,3*faixa:end)=0;
+length(X);
+omega=0:Fs/length(y):Fs-(Fs/length(y));
+waux=-fliplr(omega(1,2:end));
+w=[waux omega];
 length(w);
-plot(w,abs(2*y/length(t)));
-xlabel('f(Hz)');
+plot(w,abs(2*X/length(t)));
+xlabel('$f$(Hz)','interpreter','latex');
 ylabel('Magnitude');
-title('|X(j2\pif)|');
+title('Espectro $|X_{c}(j2\pi f)|$','interpreter','latex');
 
 % Som
 % sound(xt,Fs);
