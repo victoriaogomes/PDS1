@@ -8,7 +8,6 @@ fs = 10 * 1000;
     fmin, ...                  % Componente de frequência mínimo em Hz
     fmax);                     % Componente de frequência máximo em Hz
 signal = timetable(seconds(t'), xt');
-
 %% Dados para a construção do filtro
 fp = 509;                      % Frequência de passagem (fp) em hertz
 Amax = 1;                      % Máxima amplificação dos componentes do sinal (em dB)
