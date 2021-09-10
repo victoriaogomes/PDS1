@@ -14,10 +14,7 @@ Amax = 1;                      % Máxima amplificação dos componentes do sinal
 Amin = 20;                     % Mínima amplificação dos componentes do sinal (em dB)
 N = 1;                         % Ordem do filtro (N)
 
-
 %% Cálculo do fator de Downsample(Md) e Upsample (Mu)
-%Fs = ;
-%f_max = ;
 % - Fs/Md > 2*F_max -> Fs/(2*F_max) > Md  (Verificar os valores para que
 % seja maior que a taxa desejada realmente)
 Md = ceil(fs/(3 * (1000)));
